@@ -1,0 +1,7 @@
+PATCH http://127.0.0.1:5000/moveTask 
+content-type: application/json
+
+{
+    "id": 1,
+    "ns": 1
+}

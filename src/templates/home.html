@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban board</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+
+            <a href="/home"><img class="material-icons" src="static/images/user.png" alt="random image"><span
+                    class="icon-text"></span>Users</a><br>
+            <a href="/home"><img class="material-icons" src="static/images/client.png" alt="random image"><span
+                    class="icon-text"></span>Clients</a><br>
+            <!-- <a href="#"><img class="material-icons" src="static/images/task.png" alt="random image" ><span class="icon-text"></span>New Task</a><br> -->
+            <a href="/home"><img class="material-icons" src="static/images/database.png" alt="random image"><span
+                    class="icon-text"></span>Data Base</a><br>
+
+            <!-- attributes
+                <a href="https://www.flaticon.com/free-icons/username" title="username icons">Username icons created by Fathema Khanom - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/customers" title="customers icons">Customers icons created by SBTS2018 - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/database" title="database icons">Database icons created by Freepik - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/testimonial" title="testimonial icons">Testimonial icons created by RIkas Dzihab - Flaticon</a>
+             -->
+        </div>
+        <div class="container">
+            <div id="main">
+                <div id="New">
+                    <h3 class="header">
+                        <p font-size: 16px>New</p>
+                        <button class="add_task" type="button" onclick="togglePopup(1)">+ Add</button>
+                    </h3>
+                </div>
+
+                <div id="Progress">
+                    <h3 class="header">
+                        <p font-size: 16px>Progress</p>
+                        <button class="add_task" type="button" onclick="togglePopup(2)">+ Add</button>
+                    </h3>
+                </div>
+
+                <div id="Review">
+                    <h3 class="header">
+                        <p font-size: 16px>Review</p>
+                        <button class="add_task" type="button" onclick="togglePopup(3)">+ Add</button>
+                    </h3>
+                </div>
+
+                <div id="Complete">
+                    <h3 class="header">
+                        <p font-size: 16px>Complete</p>
+                        <button class="add_task" type="button" onclick="togglePopup(4)">+ Add</button>
+                    </h3>
+                </div>
+
+                <div id="popupOverlay" class="overlay-container">
+                    <div class="popup-box">
+                        <h2 style="color: #645ebc; margin-bottom: 10px;">Add New Task</h2>
+                        <form class="form-container" id="task-form">
+                            <label class="form-label" for="subject">Subject:</label>
+                            <input class="form-input" type="text" placeholder="Task Subject" id="subject"
+                                name="subject" required>
+
+                            <label class="form-label" for="description">Description:</label>
+                            <input class="form-input" placeholder="Task description" id="description"
+                                name="description">
+                               
+                            <label class="form-label" for="assignee">Assinged To:</label>
+                            <select id="assignee" name="assignee" class="form-input" onclick="populateAssigneeDropdown()">
+                            </select>
+                            
+                            <label class="form-label" for="owner">Owned By:</label>
+                            <select id="owner" name="owner" class="form-input" onclick="populateOwnerDropdown()">
+                            </select>
+
+                            <label class="form-label" for="client">Client:</label>
+                            <select id="client" name="client" class="form-input" onclick="populateClientDropdown()">
+                            </select>
+                                
+                            <label class="form-label" for="due">Due By:</label>
+                            <input class="form-input" type="date" placeholder=" Due Date" id="due"
+                                name="due" required>
+
+                            <button class="btn-submit" type="submit">
+                                Submit
+                            </button>
+                            
+                            <button class="btn-close-popup" onclick="togglePopup(null)" type="button">
+                                Close
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+                <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

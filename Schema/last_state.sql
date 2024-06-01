@@ -1,0 +1,5 @@
+CREATE TABLE stages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    stage VARCHAR(255) NOT NULL,
+    description VARCHAR(255)
+);

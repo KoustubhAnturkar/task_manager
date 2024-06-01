@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/task.css') }}">
+</head>
+
+<body>
+
+    <div class="blog_post">
+        <div class="img_pod">
+            <img src="https://cdn-icons-png.flaticon.com/512/4345/4345573.png" alt="random image" >
+        </div>
+        <div class="container_copy">
+            <h3 id="create-date">Not Found</h3>
+            <h1 id="subject"> Not Found</h1>
+            <p id="description"> Not Found</p>
+            <h3 id="due-date">  </h3>
+        </div>
+        <script src="{{ url_for('static', filename='scripts/task.js') }}"></script>
+    </div>
+</body>
