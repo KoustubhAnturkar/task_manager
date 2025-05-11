@@ -240,18 +240,31 @@ function partiallyApply(func, ...args) {
         return func(...args, ...remainingArgs);
     };
 }
-var mini = true;
+
+var mini = false;
 
 function toggleSidebar() {
-    if (mini) {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("mySidebar").style.boxShadow = "12px 12px 12px rgba(0,0,0,.3)";
-        this.mini = false;
+    var sidebar = document.getElementById("mySidebar");
+    if (!mini) {
+        sidebar.style.width = "250px";
+        sidebar.style.boxShadow = "12px 12px 12px rgba(0,0,0,.3)";
     } else {
-        document.getElementById("mySidebar").style.width = "100px";
-        document.getElementById("mySidebar").style.boxShadow = "";
-        this.mini = true;
+        sidebar.style.width = "100px";
+        sidebar.style.boxShadow = "";
     }
+}
+
+// Set mini to true only when mouse leaves the sidebar
+var sidebarElem = document.getElementById("mySidebar");
+if (sidebarElem) {
+    sidebarElem.addEventListener('mouseover', function() {
+        mini = false;
+        toggleSidebar();
+    });
+    sidebarElem.addEventListener('mouseout', function() {
+        mini = true;
+        toggleSidebar();
+    });
 }
 
 function togglePopup(stage) {

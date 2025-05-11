@@ -13,6 +13,11 @@ def login():
 def home():
     return render_template('home.html')
 
+
+@app.route("/userHome", methods=['GET'])
+def userHome():
+    return render_template('users.html')
+
 @app.route("/", methods=["GET"])
 def default_redirect():
     return redirect(url_for("login"))
@@ -62,9 +67,17 @@ def move_task():
 def get_users():
     return dbObject.fetch_all_users()
 
+@app.route("/usersDetailed", methods=['GET'])
+def get_users_detailed():
+    return dbObject.fetch_all_users_detailed()
+
 @app.route("/clients", methods=['GET'])
 def get_clients():
     return dbObject.fetch_all_clients()
+
+@app.route("/roles", methods=['GET'])
+def get_roles():
+    return dbObject.fetch_all_roles()
 
 
 @app.route("/newTask", methods=['POST'])
@@ -78,6 +91,23 @@ def add_new_task():
         if param not in params:
             return Response("BAD REQUEST", status=400)
     resp = dbObject.create_new_task(task_json)
+    if resp:
+        return Response(jsonify({'status': "Created"}), status=201)
+    else: 
+        return Response(jsonify({'status': "Oops something went wrong"}), status=502)
+
+
+@app.route("/newUser", methods=['POST'])
+def add_new_user():
+    if not request.is_json:
+        return Response("BAD REQUEST", status=400)
+    user_json = request.json
+    params = user_json.keys()
+    required_params = ['name', 'email', 'contact_num', 'role_id']
+    for param in required_params:
+        if param not in params:
+            return Response("BAD REQUEST", status=400)
+    resp = dbObject.create_new_user(user_json)
     if resp:
         return Response(jsonify({'status': "Created"}), status=201)
     else: 

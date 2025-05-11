@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/users.css') }}">
+</head>
+
+<body>
+    <div id="content">
+        
+        <div class="col a-right">
+            <div class="button-set", type="button", onclick="togglePopup()">
+                <button>Add New User</button>
+            </div>
+        </div>
+        <div id="mySidebar" class="sidebar">
+
+            <a href="/home"><img class="material-icons" src="static/images/house.png" alt="random image"><span
+                    class="icon-text"></span>Home</a><br>
+            <a href="/userHome"><img class="material-icons" src="static/images/user.png" alt="random image"><span
+                    class="icon-text"></span>Users</a><br>
+            <a href="/home"><img class="material-icons" src="static/images/client.png" alt="random image"><span
+                    class="icon-text"></span>Clients</a><br>
+            <!-- <a href="/home"><img class="material-icons" src="static/images/database.png" alt="random image"><span
+                    class="icon-text"></span>Data Base</a><br> -->
+
+            <!-- attributes
+                <a href="https://www.flaticon.com/free-icons/username" title="username icons">Username icons created by Fathema Khanom - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/customers" title="customers icons">Customers icons created by SBTS2018 - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/database" title="database icons">Database icons created by Freepik - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/testimonial" title="testimonial icons">Testimonial icons created by RIkas Dzihab - Flaticon</a>
+                <a href="https://www.flaticon.com/free-icons/home" title="home icons">Home icons created by Vectors Market - Flaticon</a>
+            -->
+        </div>
+        
+        <div id="popupOverlay" class="overlay-container">
+            <div class="popup-box">
+                <h2 style="color: #645ebc; margin-bottom: 10px;">Add New User</h2>
+                <form class="form-container" id="user-form">
+                    <label class="form-label" for="name">Name:</label>
+                    <input class="form-input" type="text" placeholder="Full Name" id="name" name="name" required>
+
+                    <label class="form-label" for="email">Email:</label>
+                    <input class="form-input" type="email" placeholder="Email Address" id="email" name="email">
+
+                    <label class="form-label" for="contact_num">Contact Number:</label>
+                    <input class="form-input" type="text" placeholder="Contact Number" id="contact_num" name="contact_num">
+
+                    <label class="form-label" for="role_id">Role:</label>
+                    <select id="role_id" name="role_id" class="form-input" onclick="populateRoleDropDown()">
+                    </select>
+
+                    <button class="btn-submit" type="submit">
+                        Submit
+                    </button>
+                    
+                    <button class="btn-close-popup" onclick="togglePopup(null)" type="button">
+                        Close
+                    </button>
+                </form>
+
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="col">
+                <h2 class="form-title"><span>All Users</span></h2>
+                <div class="user-table">
+                    <table class="table">
+                        <thead>
+                            <tr class="first">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th class="a-center">Phone</th>
+                                <th class="a-center">Role</th>
+                                <th class="a-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- User rows will be dynamically populated by users.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/users.js') }}"></script>
+</body>
+</html>
