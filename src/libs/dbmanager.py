@@ -106,6 +106,18 @@ class DBManager:
             print(e)
             return None
         
+    def fetch_all_clients_detailed(self):
+        self.connection.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute(f"""SELECT c.id, c.name, c.email, c.contact_num, cg.name  FROM task_manager_db.clients c 
+join task_manager_db.client_groups cg on c.group_id = cg.id """)
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            print(e)
+            return None
+        
     def fetch_all_clients(self):
         self.connection.reconnect()
         cursor = self.connection.cursor()
@@ -122,6 +134,17 @@ class DBManager:
         cursor = self.connection.cursor()
         try:
             cursor.execute("SELECT id, role FROM roles ")
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            print(e)
+            return None
+        
+    def fetch_all_groups(self):
+        self.connection.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("SELECT id, name FROM client_groups ")
             rows = cursor.fetchall()
             return rows
         except Exception as e:
