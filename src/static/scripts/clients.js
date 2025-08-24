@@ -1,7 +1,8 @@
 
 var mini = false;
-var roles = null;
-var roleClicked = false;
+var groupClicled = false;
+var groups = null;
+
 
 
 // Side bar functions
@@ -32,7 +33,7 @@ if (sidebarElem) {
 
 // Populate Users dashboard
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://127.0.0.1:5000/userDets')
+    fetch('http://127.0.0.1:5000/clientDets')
         .then(function (response) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -42,15 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(function (data) {
             var tbody = document.querySelector('.table tbody');
             tbody.innerHTML = '';
-            data.forEach(function (user) {
-                console.log(user)
+            data.forEach(function (client) {
+                console.log(client)
                 var tr = document.createElement('tr');
                 tr.innerHTML =
-                    `<td>${user[0]}</td>` +
-                    `<td>${user[1]}</td>` +
-                    `<td>${user[2] || ''}</td>` +
-                    `<td class='a-center'>${user[3] || ''}</td>` +
-                    `<td class='a-center'>${user[4] || ''}</td>` +
+                    `<td>${client[0]}</td>` +
+                    `<td>${client[1]}</td>` +
+                    `<td>${client[2] || ''}</td>` +
+                    `<td class='a-center'>${client[3] || ''}</td>` +
+                    `<td class='a-center'>${client[4] || ''}</td>` +
                     `<td class='a-right'>
                         <button class='action-btn edit'>Edit</button>
                         <button class='action-btn details'>Details</button>
@@ -63,12 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-/* New User Popups*/
-function populateRoleDropDown() {
-    if (!roleClicked) {
-        var select = document.getElementById("role_id"); // Get the select element
-        if (!roles) {
-            fetch('http://127.0.0.1:5000/roles')
+/* New Client Popups*/
+function populateGroupDropdown(){
+    
+    if (!groupClicled) {
+        var select = document.getElementById("group_id"); // Get the select element
+        if (!groups) {
+            fetch('http://127.0.0.1:5000/groups')
             .then(function (response) {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -78,11 +80,11 @@ function populateRoleDropDown() {
             })
             .then(function (data) {
                 console.log(data);
-                roles = data;
-                for (var i = 0; i < roles.length; i++) {
+                groups = data;
+                for (var i = 0; i < groups.length; i++) {
                     var option = document.createElement("option"); // Create a new option element
-                    option.text = roles[i][1]; // Set the text of the option
-                    option.value = roles[i][0]; // Set the value of the option (optional)
+                    option.text = groups[i][1]; // Set the text of the option
+                    option.value = groups[i][0]; // Set the value of the option (optional)
                     select.appendChild(option); // Append the option to the select element
                 }
             })
@@ -92,16 +94,17 @@ function populateRoleDropDown() {
             })
         }
         else {
-            for (var i = 0; i < roles.length; i++) {
+            for (var i = 0; i < groups.length; i++) {
                 var option = document.createElement("option"); // Create a new option element
-                option.text = roles[i][1]; // Set the text of the option
-                option.value = roles[i][0]; // Set the value of the option (optional)
+                option.text = groups[i][1]; // Set the text of the option
+                option.value = groups[i][0]; // Set the value of the option (optional)
                 select.appendChild(option); // Append the option to the select element
             }
         }
-        roleClicked = true;
+        groupClicled = true;
     }
 }
+
 
 
 function togglePopup() {
@@ -110,7 +113,7 @@ function togglePopup() {
 };
 
 
-document.getElementById('user-form').addEventListener('submit', function(event) {
+document.getElementById('client-form').addEventListener('submit', function(event) {
     event.preventDefault();  // Prevent the default form submission
 
     // Get form values
@@ -118,7 +121,6 @@ document.getElementById('user-form').addEventListener('submit', function(event) 
     task_dict['name'] = document.getElementById('name').value;
     task_dict['email'] = document.getElementById('email').value;
     task_dict['contact_num'] = document.getElementById('contact_num').value
-    task_dict['role_id'] = document.getElementById('role_id').value
     // Execute your function with the form values
     fetch('http://127.0.0.1:5000/newUser', {
             method: 'POST', // Specify the request method as POST
