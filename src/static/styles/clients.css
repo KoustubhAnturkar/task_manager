@@ -343,7 +343,7 @@ main .sidebar {
     cursor: pointer;
 }
 
-/* Popup new User */
+/* Popup new Client */
 
 .overlay-container {
   display: none;
@@ -359,17 +359,25 @@ main .sidebar {
   transition: opacity 0.3s ease;
 }
 
+/* Enable scrolling for the popup overlay and ensure popup-box fits on smaller screens */
+#popupOverlay.overlay-container {
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
 .popup-box {
   background: #fff;
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  width: 320px;
+  width: 500px;
   text-align: center;
   opacity: 0;
   transform: scale(0.8);
   animation: fadeInUp 0.5s ease-out forwards;
   justify-content: space-evenly;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .form-container {
@@ -438,7 +446,7 @@ main .sidebar {
   opacity: 1;
 }
 
-/* Action buttons in the user table */
+/* Action buttons in the clients table */
 .action-btn {
     background: linear-gradient(90deg, #b5179e 0%, #f72585 100%);
     color: #fff;

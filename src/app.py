@@ -18,6 +18,10 @@ def home():
 def userHome():
     return render_template('users.html')
 
+@app.route("/clientHome", methods=['GET'])
+def clientHome():
+    return render_template('clients.html')
+
 @app.route("/", methods=["GET"])
 def default_redirect():
     return redirect(url_for("login"))
@@ -67,9 +71,13 @@ def move_task():
 def get_users():
     return dbObject.fetch_all_users()
 
-@app.route("/usersDetailed", methods=['GET'])
+@app.route("/userDets", methods=['GET'])
 def get_users_detailed():
     return dbObject.fetch_all_users_detailed()
+
+@app.route("/clientDets", methods=['GET'])
+def get_client_detailed():
+    return dbObject.fetch_all_clients_detailed()
 
 @app.route("/clients", methods=['GET'])
 def get_clients():
@@ -79,6 +87,10 @@ def get_clients():
 def get_roles():
     return dbObject.fetch_all_roles()
 
+
+@app.route("/groups", methods= ["GET"])
+def get_groups():
+    return dbObject.fetch_all_groups()
 
 @app.route("/newTask", methods=['POST'])
 def add_new_task():
